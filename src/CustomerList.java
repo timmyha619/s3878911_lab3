@@ -31,6 +31,29 @@ public class CustomerList {
 		return true;
 	}
 
-    public <SuperVIP> SuperVIP getSuperVIP(String ID) {
-    }
+
+	public class SuperVIP {
+	private static SuperVIP INSTANCE = new SuperVIP();
+	private SuperVIP() {}
+	public static SuperVIP getInstance() {
+	return INSTANCE;
+	}
+}
+
+public class CustomerFactory {
+
+	public static Customer create(String type, String name, String address, String iD, String phone) {
+		switch (type) {
+			case "guest": {
+				return new GuestCustomer(name, address, iD, phone);
+			}
+			case "vip": {
+				return new VIPCustomer(name, address, iD, phone);
+			}
+			case "supervip": {
+				return SuperVip.getInstance();
+			}
+		}
+		return null;
+	}
 }
